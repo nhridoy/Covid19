@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Covid Tracker</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.css')}}">
+
+    <script type="text/javascript" src="{{url_for('static',filename='js/bootstrap.js')}}"></script>
+</head>
+<body>
+<section class="head">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Navbar</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Features</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Pricing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="row">
+            <div class="col-7">
+                <h2>Covid Tracker</h2>
+                <div class="alert alert-success" role="alert">Country Detected {{detected_country.upper()}}</div>
+            </div>
+            <div class="col-3">
+                <p>Date: {{date}}</p>
+                <p>Time: {{time}}</p>
+            </div>
+        </div>
+        <div class="alert alert-info" role="alert">Not in {{country_name}}? Select from Below</div>
+        <form action="/" class="form-text" method="GET">
+            <div class="row">
+                <div class="col-10">
+                    <select name="select_country" class="form-select form-select-lg mb-4" aria-label=".form-select-lg example">
+                        <option value="{{country_name}}" selected>{{country_name}}</option>
+                        {% for country in country %}
+                        <option value="{{country}}">{{country}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-2">
+                    <button style="width: 100%;" type="submit" class="btn btn-outline-primary btn-lg">Select</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<section class="body">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Total Recovered WorldWide</h5>
+                        <p class="card-text fw-bold lead text-center">{{world_total_recovered}}</p>
+                        <p class="card-text  lead text-center">New Recovered: 000</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Total Cases WorldWide</h5>
+                        <p class="card-text fw-bold lead text-center">{{world_total_confirmed_cases}}</p>
+                        <p class="card-text  lead text-center">New Case: {{world_total_confirmed_cases_new}}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Total Death WorldWide</h5>
+                        <p class="card-text fw-bold lead text-center">{{world_total_death}}</p>
+                        <p class="card-text  lead text-center">New Death: {{world_total_death_new}}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Total Active WorldWide</h5>
+                        <p class="card-text fw-bold lead text-center">{{world_total_active}}</p>
+                        <p class="card-text  lead text-center">Serious Case: {{world_total_serious}}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="p-3"></div>
+<section class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    {{fig}}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="container">
+    <div class="p-3 alert alert-success" role="alert">You have selected: {{country_name.upper()}}</div>
+</section>
+<section class="body">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Total Recovered {{country_name.upper()}}</h5>
+                        <p class="card-text fw-bold lead text-center">{{country_total_recovered}}</p>
+                        <p class="card-text  lead text-center">New Recovered: 000</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Total Cases {{country_name.upper()}}</h5>
+                        <p class="card-text fw-bold lead text-center">{{country_total_cases}}</p>
+                        <p class="card-text  lead text-center">New Case: {{country_cases_new}}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Total Death {{country_name.upper()}}</h5>
+                        <p class="card-text fw-bold lead text-center">{{country_total_death}}</p>
+                        <p class="card-text  lead text-center">New Death: {{country_death_new}}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Total Active {{country_name.upper()}}</h5>
+                        <p class="card-text fw-bold lead text-center">{{country_total_active}}</p>
+                        <p class="card-text  lead text-center">Serious Case: {{country_total_serious}}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
