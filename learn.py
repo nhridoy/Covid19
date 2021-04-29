@@ -5,13 +5,15 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from covid import Covid
-import datetime
+from datetime import datetime
 import plotly.express as px
 from requests.exceptions import ConnectionError
 import requests
 import urllib.request
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
+import sqdb
+from sqdb import con, con2
 
 cache = Cache(config={'CACHE_TYPE': 'SimpleCache'})
 
@@ -28,10 +30,10 @@ def get_country(c=""):
     else:
         county_name = ip_details["country_name"]
     ### Date Time ###
-    dt = datetime.datetime.now()
+    dt = datetime.now()
     dates = dt.date()
     times = dt.time()
-    date = dates.strftime('%d - %B - %Y')
+    date = dates.strftime("%Y-%m-%d")
     time = times.strftime('%I:%M %p')
 
     ### Getting worldometer data ###
@@ -47,14 +49,15 @@ countries, country_name, date, time, covid_data = get_country()
 
 
 def covid_processing(country_name=country_name):
-    @functools.cache
-    def extra_data():
+    '''def extra_data():
         url = "https://covid.ourworldindata.org/data/owid-covid-data.csv"
         # url = "owid-covid-data.csv"
         db = pd.read_csv(url)
         return db
 
-    db = extra_data()
+    db = extra_data()'''
+
+    dtdb, db = sqdb.in_date(date, time)
     world = db[db["location"] == "World"]
     country = db[db["location"] == country_name.capitalize()]
     world_total = world[["location", "date", "total_cases", "total_deaths"]]
@@ -90,6 +93,7 @@ def covid_processing(country_name=country_name):
     world_country = pd.concat(world_country)
     fig = px.line(world_country, x="date", y="total_cases", title=f'Total Cases Compare Between World and {country_name}', color='location')
     fig = fig.to_html(fig, full_html=False)
+
 
     return world_total_confirmed_cases, world_total_confirmed_cases_new, world_total_death, world_total_death_new, world_total_recovered, world_total_active, world_total_serious, country_cases, country_total_cases, country_total_death, country_total_recovered, country_total_active, country_cases_new, country_death_new, country_total_serious, fig
 
