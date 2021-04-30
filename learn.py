@@ -18,7 +18,7 @@ from sqdb import con, con2
 cache = Cache(config={'CACHE_TYPE': 'SimpleCache'})
 
 
-def get_country(c="usa"):
+def get_country(c="india"):
     ### Geting Location ###
     ext_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
     ip = requests.get('https://api64.ipify.org').text
@@ -28,7 +28,7 @@ def get_country(c="usa"):
     if c:
         county_name = c
     else:
-        county_name = ip_details["country_name"]
+        county_name = "india"
     ### Date Time ###
     dt = datetime.now()
     dates = dt.date()
