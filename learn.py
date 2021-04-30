@@ -22,7 +22,7 @@ def get_country(c=""):
         county_name = c
     else:
         # county_name = "bangladesh"
-        county_name = ip_details["country_name"]
+        county_name = ip_details["country_name"].lower()
     ### Date Time ###
     dt = datetime.now()
     dates = dt.date()
