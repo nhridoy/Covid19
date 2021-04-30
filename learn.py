@@ -18,7 +18,7 @@ from sqdb import con, con2
 cache = Cache(config={'CACHE_TYPE': 'SimpleCache'})
 
 
-def get_country(c=""):
+def get_country(c="usa"):
     ### Geting Location ###
     ext_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
     ip = requests.get('https://api64.ipify.org').text
