@@ -13,16 +13,16 @@ from sqdb import con, con2
 def get_country(c=""):
     ### Geting Location ###
     # ext_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
-    # ip = requests.get('https://api64.ipify.org').text
-    ip = geocoder.ip("me")
+    ip = requests.get('https://api64.ipify.org').text
+    # ip = geocoder.ip("me")
     ip_url = f"https://reallyfreegeoip.org/json/{ip.ip}"
     r = requests.get(ip_url)
     ip_details = r.json()
     if c:
         county_name = c
     else:
-        # county_name = "bangladesh"
-        county_name = ip_details["country_name"].lower()
+        county_name = "bangladesh"
+        # county_name = ip_details["country_name"].lower()
     ### Date Time ###
     dt = datetime.now()
     dates = dt.date()
