@@ -1,22 +1,14 @@
-import functools
-from flask_caching import Cache
-
 import pandas as pd
-import numpy as np
 import geocoder
 from covid import Covid
 from datetime import datetime
 import plotly.express as px
-from requests.exceptions import ConnectionError
 import requests
 import urllib.request
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 import sqdb
 from sqdb import con, con2
-
-cache = Cache(config={'CACHE_TYPE': 'SimpleCache'})
-
 
 def get_country(c=""):
     ### Geting Location ###

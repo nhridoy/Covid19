@@ -1,10 +1,5 @@
-from flask import Flask, render_template, jsonify, request, Markup
-import pandas as pd
-import numpy as np
+from flask import Flask, render_template, request, Markup
 import learn
-import json
-import decimal
-import simplejson
 
 app = Flask(__name__)
 
