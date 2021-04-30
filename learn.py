@@ -28,7 +28,7 @@ def get_country(c="india"):
     if c:
         county_name = c
     else:
-        county_name = "india"
+        county_name = "bangladesh"
     ### Date Time ###
     dt = datetime.now()
     dates = dt.date()
