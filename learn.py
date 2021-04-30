@@ -15,7 +15,8 @@ def get_country(c="bangladesh"):
     # ext_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
     ip = requests.get('https://api64.ipify.org').text
     # ip = geocoder.ip("me")
-    ip_url = f"https://reallyfreegeoip.org/json/{ip.ip}"
+    # ip = ip.ip
+    ip_url = f"https://reallyfreegeoip.org/json/{ip}"
     r = requests.get(ip_url)
     ip_details = r.json()
     if c:
