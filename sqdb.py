@@ -34,8 +34,8 @@ print(f"New Date: {new_date}")
 def in_date(date, time):
     if old_date != new_date:
         ### Loading Data From Web ###
-        # url = "https://covid.ourworldindata.org/data/owid-covid-data.csv"
-        url = "owid-covid-data.csv"
+        url = "https://covid.ourworldindata.org/data/owid-covid-data.csv"
+        # url = "owid-covid-data.csv"
         df = pd.read_csv(url)
         col = list(df)
 
