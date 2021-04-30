@@ -9,10 +9,11 @@
 </head>
 <body>
 <section class="head">
-    <div class="row">
+    <div class="container">
+        <div class="row">
             <div class="col-7">
                 <h2>Covid Tracker</h2>
-                <div class="alert alert-success" role="alert">Country Selected {{detected_country.upper()}}</div>
+                <div class="alert alert-success" role="alert">Country Selected {{country_name.upper()}}</div>
             </div>
             <div class="col-3">
                 <p>Date: {{date}}</p>
@@ -22,7 +23,8 @@
         <form action="/" class="form-text" method="GET">
             <div class="row">
                 <div class="col-10">
-                    <select name="select_country" class="form-select form-select-lg mb-4" aria-label=".form-select-lg example">
+                    <select name="select_country" class="form-select form-select-lg mb-4"
+                            aria-label=".form-select-lg example">
                         <option value="{{country_name}}" selected>{{country_name}}</option>
                         {% for country in country %}
                         <option value="{{country}}">{{country}}</option>
@@ -34,6 +36,8 @@
                 </div>
             </div>
         </form>
+    </div>
+
 </section>
 <section class="body">
     <div class="container">
