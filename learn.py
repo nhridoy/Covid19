@@ -10,6 +10,7 @@ from sklearn.preprocessing import PolynomialFeatures
 import sqdb
 from sqdb import con, con2
 
+
 def get_country(c="bangladesh"):
     ### Geting Location ###
     # ext_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
@@ -53,6 +54,10 @@ def covid_processing(country_name=country_name):
     db = extra_data()'''
 
     dtdb, db = sqdb.in_date(date, time)
+
+    da = dtdb["datee"].values
+    ti = dtdb["timee"].values
+
     world = db[db["location"] == "World"]
     country = db[db["location"] == country_name.capitalize()]
     world_total = world[["location", "date", "total_cases", "total_deaths"]]
@@ -86,11 +91,11 @@ def covid_processing(country_name=country_name):
     ### Figure Making ###
     world_country = [world_total, country_total]
     world_country = pd.concat(world_country)
-    fig = px.line(world_country, x="date", y="total_cases", title=f'Total Cases Compare Between World and {country_name}', color='location')
+    fig = px.line(world_country, x="date", y="total_cases",
+                  title=f'Total Cases Compare Between World and {country_name}', color='location')
     fig = fig.to_html(fig, full_html=False)
 
-
-    return world_total_confirmed_cases, world_total_confirmed_cases_new, world_total_death, world_total_death_new, world_total_recovered, world_total_active, world_total_serious, country_cases, country_total_cases, country_total_death, country_total_recovered, country_total_active, country_cases_new, country_death_new, country_total_serious, fig
+    return da, ti, world_total_confirmed_cases, world_total_confirmed_cases_new, world_total_death, world_total_death_new, world_total_recovered, world_total_active, world_total_serious, country_cases, country_total_cases, country_total_death, country_total_recovered, country_total_active, country_cases_new, country_death_new, country_total_serious, fig
 
 
 '''world_total_confirmed_cases, world_total_confirmed_cases_new, world_total_death, world_total_death_new, world_total_recovered, world_total_active, world_total_serious, country_cases, country_total_cases, country_total_death, country_total_recovered, country_total_active, country_cases_new, country_death_new, country_total_serious, fig = covid_processing()
