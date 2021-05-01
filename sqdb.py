@@ -24,15 +24,31 @@ con2.commit()
 cur2.execute("SELECT * from d_t")
 row = cur2.fetchall()
 old_date = row[0][0]
+old_time = row[0][1]
 ### Converting String Date to DateTime Object ###
 old_date = parse(old_date)
+old_time = parse(old_time)
 new_date = parse(str(dates))
+new_time = parse(time)
 print(f"Old Date: {old_date}")
 print(f"New Date: {new_date}")
 
+old_time = datetime.strptime(str(old_time), "%Y-%m-%d %H:%M:%S")
+new_time = datetime.strptime(str(new_time), "%Y-%m-%d %H:%M:%S")
+comp_time = new_time-old_time
+static_time = datetime.strptime(f"{date} 04:00:00", "%Y-%m-%d %H:%M:%S")
+comp_time = datetime.strptime(f"{date} {comp_time}", "%Y-%m-%d %H:%M:%S")
+
+print(f"Old Time: {(old_time)}")
+print(f"New Time: {(new_time)}")
+print(f"Static Time: {(static_time)}")
+print(f"Comp Time: {(comp_time)}")
+print(static_time <= comp_time)
+
+
 
 def in_date(date, time):
-    if old_date != new_date:
+    if old_date != new_date or static_time <= comp_time:
         ### Loading Data From Web ###
         url = "https://covid.ourworldindata.org/data/owid-covid-data.csv"
         # url = "owid-covid-data.csv"
