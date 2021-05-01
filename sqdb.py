@@ -25,6 +25,7 @@ cur2.execute("SELECT * from d_t")
 row = cur2.fetchall()
 old_date = row[0][0]
 old_time = row[0][1]
+old_time = (f"{old_date} {old_time}")
 ### Converting String Date to DateTime Object ###
 old_date = parse(old_date)
 old_time = parse(old_time)
