@@ -4,8 +4,14 @@
     <meta charset="UTF-8">
     <title>Covid Tracker</title>
     <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/dark.css')}}">
+
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/dark.css">
 
     <script type="text/javascript" src="{{url_for('static',filename='js/bootstrap.js')}}"></script>
+    <script type="text/javascript" src="../static/js/bootstrap.js"></script>
+    <script src="https://kit.fontawesome.com/eaf591811e.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <section class="head">
@@ -17,6 +23,14 @@
             </div>
             <div class="col-3">
                 <p>Date: {{date}} (UTC±00:00)</p>
+            </div>
+            <div class="col-1">
+                <input type="checkbox" class="checkbox" id="chk"/>
+                <label class="label" for="chk">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i>
+                    <div class="ball"></div>
+                </label>
             </div>
         </div>
         <div class="alert alert-info" role="alert">Not in {{country_name}}? Select from Below</div>
@@ -47,10 +61,11 @@
                     <div class="card-body">
                         <h5 class="card-title text-center">Total Recovered WorldWide</h5>
                         <p class="card-text fw-bold lead text-center">{{world_total_recovered}}</p>
-                        <p class="card-text  lead text-center">New Recovered: 000</p>
+                        <p class="card-text recovered lead text-center">New Recovered: ↑000</p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted"><p class="text-center">Last updated {{da}} at: {{ti}} (UTC±00:00)</p></small>
+                        <small class="text-muted"><p class="text-center">Last updated {{da}} at: {{ti}} (UTC±00:00)</p>
+                        </small>
                     </div>
                 </div>
             </div>
@@ -59,10 +74,11 @@
                     <div class="card-body">
                         <h5 class="card-title text-center">Total Cases WorldWide</h5>
                         <p class="card-text fw-bold lead text-center">{{world_total_confirmed_cases}}</p>
-                        <p class="card-text  lead text-center">New Case: {{world_total_confirmed_cases_new}}</p>
+                        <p class="card-text danger lead text-center">New Case: ↑{{world_total_confirmed_cases_new}}</p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted"><p class="text-center">Last updated {{da}} at: {{ti}} (UTC±00:00)</p></small>
+                        <small class="text-muted"><p class="text-center">Last updated {{da}} at: {{ti}} (UTC±00:00)</p>
+                        </small>
                     </div>
                 </div>
             </div>
@@ -71,10 +87,11 @@
                     <div class="card-body">
                         <h5 class="card-title text-center">Total Death WorldWide</h5>
                         <p class="card-text fw-bold lead text-center">{{world_total_death}}</p>
-                        <p class="card-text  lead text-center">New Death: {{world_total_death_new}}</p>
+                        <p class="card-text danger lead text-center">New Death: ↑{{world_total_death_new}}</p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted"><p class="text-center">Last updated {{da}} at: {{ti}} (UTC±00:00)</p></small>
+                        <small class="text-muted"><p class="text-center">Last updated {{da}} at: {{ti}} (UTC±00:00)</p>
+                        </small>
                     </div>
                 </div>
             </div>
@@ -83,10 +100,11 @@
                     <div class="card-body">
                         <h5 class="card-title text-center">Total Active WorldWide</h5>
                         <p class="card-text fw-bold lead text-center">{{world_total_active}}</p>
-                        <p class="card-text  lead text-center">Serious Case: {{world_total_serious}}</p>
+                        <p class="card-text danger lead text-center">Serious Case: ↑{{world_total_serious}}</p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted"><p class="text-center">Last updated {{da}} at: {{ti}} (UTC±00:00)</p></small>
+                        <small class="text-muted"><p class="text-center">Last updated {{da}} at: {{ti}} (UTC±00:00)</p>
+                        </small>
                     </div>
                 </div>
             </div>
@@ -116,10 +134,11 @@
                     <div class="card-body">
                         <h5 class="card-title text-center">Total Recovered {{country_name.upper()}}</h5>
                         <p class="card-text fw-bold lead text-center">{{country_total_recovered}}</p>
-                        <p class="card-text  lead text-center">New Recovered: 000</p>
+                        <p class="card-text recovered lead text-center">New Recovered: ↑000</p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted"><p class="text-center">Last updated {{da}} at: {{ti}} (UTC±00:00)</p></small>
+                        <small class="text-muted"><p class="text-center">Last updated {{da}} at: {{ti}} (UTC±00:00)</p>
+                        </small>
                     </div>
                 </div>
             </div>
@@ -128,10 +147,11 @@
                     <div class="card-body">
                         <h5 class="card-title text-center">Total Cases {{country_name.upper()}}</h5>
                         <p class="card-text fw-bold lead text-center">{{country_total_cases}}</p>
-                        <p class="card-text  lead text-center">New Case: {{country_cases_new}}</p>
+                        <p class="card-text danger lead text-center">New Case: ↑{{country_cases_new}}</p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted"><p class="text-center">Last updated {{da}} at: {{ti}} (UTC±00:00)</p></small>
+                        <small class="text-muted"><p class="text-center">Last updated {{da}} at: {{ti}} (UTC±00:00)</p>
+                        </small>
                     </div>
                 </div>
             </div>
@@ -140,10 +160,11 @@
                     <div class="card-body">
                         <h5 class="card-title text-center">Total Death {{country_name.upper()}}</h5>
                         <p class="card-text fw-bold lead text-center">{{country_total_death}}</p>
-                        <p class="card-text  lead text-center">New Death: {{country_death_new}}</p>
+                        <p class="card-text danger lead text-center">New Death: ↑{{country_death_new}}</p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted"><p class="text-center">Last updated {{da}} at: {{ti}} (UTC±00:00)</p></small>
+                        <small class="text-muted"><p class="text-center">Last updated {{da}} at: {{ti}} (UTC±00:00)</p>
+                        </small>
                     </div>
                 </div>
             </div>
@@ -152,15 +173,25 @@
                     <div class="card-body">
                         <h5 class="card-title text-center">Total Active {{country_name.upper()}}</h5>
                         <p class="card-text fw-bold lead text-center">{{country_total_active}}</p>
-                        <p class="card-text  lead text-center">Serious Case: {{country_total_serious}}</p>
+                        <p class="card-text danger lead text-center">Serious Case: ↑{{country_total_serious}}</p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted"><p class="text-center">Last updated {{da}} at: {{ti}} (UTC±00:00)</p></small>
+                        <small class="text-muted"><p class="text-center">Last updated {{da}} at: {{ti}} (UTC±00:00)</p>
+                        </small>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<script>
+    const chk = document.getElementById('chk');
+
+    chk.addEventListener('change', () => {
+        document.body.classList.toggle('light');
+    });
+
+</script>
 </body>
 </html>
