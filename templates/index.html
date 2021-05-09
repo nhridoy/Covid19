@@ -6,11 +6,11 @@
     <link rel="stylesheet" href="{{url_for('static',filename='css/bootstrap.css')}}">
     <link rel="stylesheet" href="{{url_for('static',filename='css/dark.css')}}">
 
-<!--    <link rel="stylesheet" href="../static/css/bootstrap.css">-->
-<!--    <link rel="stylesheet" href="../static/css/dark.css">-->
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/dark.css">
 
     <script type="text/javascript" src="{{url_for('static',filename='js/bootstrap.js')}}"></script>
-<!--    <script type="text/javascript" src="../static/js/bootstrap.js"></script>-->
+    <script type="text/javascript" src="../static/js/bootstrap.js"></script>
     <script src="https://kit.fontawesome.com/eaf591811e.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -35,8 +35,8 @@
         </div>
         <div class="alert alert-info" role="alert">Not in {{country_name}}? Select from Below</div>
         <form action="/" class="form-text" method="GET">
-            <div class="row">
-                <div class="col-10">
+            <div class="row mb-3">
+                <div class="col-lg-10 col-md-10 col-sm-12">
                     <select name="select_country" class="form-select form-select-lg mb-4"
                             aria-label=".form-select-lg example">
                         <option value="{{country_name}}" selected>{{country_name}}</option>
@@ -45,7 +45,7 @@
                         {% endfor %}
                     </select>
                 </div>
-                <div class="col-2">
+                <div class="col-lg-2 col-md-2 col-sm-12">
                     <button style="width: 100%;" type="submit" class="btn btn-outline-primary btn-lg">Select</button>
                 </div>
             </div>

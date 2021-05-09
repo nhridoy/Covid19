@@ -64,7 +64,7 @@ def covid_processing(country_name=country_name):
     ### Web Scraping ###
     full_page = requests.get("https://www.worldometers.info/coronavirus/")
     full_page = full_page.content
-    soup = BeautifulSoup(full_page)
+    soup = BeautifulSoup(full_page, "html.parser")
     ### Scrapping World Data ###
     world_o = soup.find_all("tr", {"class": "total_row_world"})[7]
     world_recovered_new = world_o.find_all("td")[7].text[1:].replace(',', '')
