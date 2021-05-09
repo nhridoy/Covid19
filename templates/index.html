@@ -10,7 +10,7 @@
 <!--    <link rel="stylesheet" href="../static/css/dark.css">-->
 
     <script type="text/javascript" src="{{url_for('static',filename='js/bootstrap.js')}}"></script>
-    <!--    <script type="text/javascript" src="../static/js/bootstrap.js"></script>-->
+<!--    <script type="text/javascript" src="../static/js/bootstrap.js"></script>-->
     <script src="https://kit.fontawesome.com/eaf591811e.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -61,7 +61,7 @@
                     <div class="card-body">
                         <h5 class="card-title text-center">Total Recovered WorldWide</h5>
                         <p class="card-text fw-bold lead text-center">{{world_total_recovered}}</p>
-                        <p class="card-text recovered lead text-center">New Recovered: ↑000</p>
+                        <p class="card-text recovered lead text-center">New Recovered: ↑{{world_recovered_new}}</p>
                     </div>
                     <div class="card-footer">
                         <small class="text-muted"><p class="text-center">Last updated {{da}} at: {{ti}} (UTC±00:00)</p>
@@ -75,6 +75,8 @@
                         <h5 class="card-title text-center">Total Cases WorldWide</h5>
                         <p class="card-text fw-bold lead text-center">{{world_total_confirmed_cases}}</p>
                         <p class="card-text danger lead text-center">New Case: ↑{{world_total_confirmed_cases_new}}</p>
+                        <p class="card-text text-warning text-center">Total Case Predicted for Tomorrow:
+                            {{world_total_predicted_cases}}</p>
                     </div>
                     <div class="card-footer">
                         <small class="text-muted"><p class="text-center">Last updated {{da}} at: {{ti}} (UTC±00:00)</p>
@@ -132,9 +134,9 @@
             <div class="col">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h5 class="card-title text-center">Total Recovered {{country_name.upper()}}</h5>
+                        <h5 class="card-title text-center">Total Recovered in {{country_name.upper()}}</h5>
                         <p class="card-text fw-bold lead text-center">{{country_total_recovered}}</p>
-                        <p class="card-text recovered lead text-center">New Recovered: ↑000</p>
+                        <p class="card-text recovered lead text-center">New Recovered: ↑{{country_recovered_new}}</p>
                     </div>
                     <div class="card-footer">
                         <small class="text-muted"><p class="text-center">Last updated {{da}} at: {{ti}} (UTC±00:00)</p>
@@ -145,9 +147,11 @@
             <div class="col">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h5 class="card-title text-center">Total Cases {{country_name.upper()}}</h5>
+                        <h5 class="card-title text-center">Total Cases in {{country_name.upper()}}</h5>
                         <p class="card-text fw-bold lead text-center">{{country_total_cases}}</p>
                         <p class="card-text danger lead text-center">New Case: ↑{{country_cases_new}}</p>
+                        <p class="card-text text-warning text-center">New Case Predicted for Tomorrow:
+                            {{country_total_predicted_cases}}</p>
                     </div>
                     <div class="card-footer">
                         <small class="text-muted"><p class="text-center">Last updated {{da}} at: {{ti}} (UTC±00:00)</p>
@@ -158,7 +162,7 @@
             <div class="col">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h5 class="card-title text-center">Total Death {{country_name.upper()}}</h5>
+                        <h5 class="card-title text-center">Total Death in {{country_name.upper()}}</h5>
                         <p class="card-text fw-bold lead text-center">{{country_total_death}}</p>
                         <p class="card-text danger lead text-center">New Death: ↑{{country_death_new}}</p>
                     </div>
@@ -171,7 +175,7 @@
             <div class="col">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h5 class="card-title text-center">Total Active {{country_name.upper()}}</h5>
+                        <h5 class="card-title text-center">Total Active in {{country_name.upper()}}</h5>
                         <p class="card-text fw-bold lead text-center">{{country_total_active}}</p>
                         <p class="card-text danger lead text-center">Serious Case: ↑{{country_total_serious}}</p>
                     </div>
@@ -181,6 +185,18 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</section>
+
+<section class="body">
+    <div class="container">
+        <div class=" p-2 mt-2 footer">
+            <p class="text-center">&copy; NAHIDUJJAMAN HRIDOY</p>
+            <p class="text-center">Data Provided By - <a
+                    href="https://www.worldometers.info/coronavirus/">worldometer</a>, <a
+                    href="https://coronavirus.jhu.edu/map.html">Johns Hopkins University</a> and <a
+                    href="https://ourworldindata.org/coronavirus-source-data">Our World in Data</a></p>
         </div>
     </div>
 </section>

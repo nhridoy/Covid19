@@ -43,6 +43,10 @@ body {
     transition: background 0.2s linear;
 }
 
+.footer{
+    background: #1e1e30;
+}
+
 .form-select {
     background-color: var(--form-color);
     color: var(--text-color);
@@ -121,4 +125,7 @@ body.light .card {
 body.light .form-select {
     background-color: var(--form-color-light);
     color: var(--text-color-light);
+}
+body.light .footer{
+    background: #fff;
 }
