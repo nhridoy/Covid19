@@ -10,7 +10,7 @@ import urllib.request
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 import sqdb
-from sqdb import con, con2
+from sqdb import con
 
 
 def get_country(c="bangladesh"):

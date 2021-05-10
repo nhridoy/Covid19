@@ -1,7 +1,8 @@
-import sqlite3
+import psycopg2
 import pandas as pd
 from datetime import datetime
 from dateutil.parser import parse
+from sqlalchemy import create_engine
 
 ### Date Time ###
 dt = datetime.now()
@@ -11,18 +12,25 @@ date = dates.strftime("%Y-%m-%d")
 time = times.strftime('%I:%M %p')
 
 ### Creating Database ###
-con = sqlite3.connect("covid-data.db", check_same_thread=False)
-cur = con.cursor()
+Host = 'ec2-107-20-153-39.compute-1.amazonaws.com'
+Database = 'd733kp4iefrk3c'
+User = 'kbjvpsitqsewlk'
+Port = '5432'
+Password = 'b60dfaa659edc207777782569ba293c529de7c54e62ea542b3767a9aac75feee'
 
-### CREATE Date DB ###
-con2 = sqlite3.connect("date.db", check_same_thread=False)
-cur2 = con2.cursor()
+con = psycopg2.connect(f"dbname='{Database}' user='{User}' password='{Password}' host='{Host}' port='{Port}'")
+cur = con.cursor()
+engine = create_engine(f'postgresql://{User}:{Password}@{Host}:{Port}/{Database}')
+
 ### CREATE Date TABLE ###
-cur2.execute("CREATE TABLE if NOT EXISTS d_t (datee, timee)")
-con2.commit()
+cur.execute("CREATE TABLE if NOT EXISTS d_t (datee TEXT, timee TEXT)")
+con.commit()
+### INSERT Date DATA ###
+cur.execute("INSERT INTO d_t (datee, timee) VALUES (%s,%s)", (date, time))
+con.commit()
 ### VIEW Date DATA ###
-cur2.execute("SELECT * from d_t")
-row = cur2.fetchall()
+cur.execute("SELECT * from d_t")
+row = cur.fetchall()
 old_date = row[0][0]
 old_time = row[0][1]
 old_time = (f"{old_date} {old_time}")
@@ -56,36 +64,25 @@ def in_date(date, time):
         # url = "owid-covid-data.csv"
         df = pd.read_csv(url)
         col = list(df)
-
-        ### Creating Table ###
-        cur.execute(
-            "CREATE TABLE if NOT EXISTS covid ({},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},"
-            "{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},"
-            "{},{} )".format(*col))
+        df.to_sql("covid", engine)
         con.commit()
-
-        ### Intering Values from csv to Table ###
-        cur.execute("DELETE from covid")
-        con.commit()
-        df.to_sql("covid", con, if_exists='append', index=False)
-
 
         ### DELETING Date DATA ###
-        cur2.execute("DELETE from d_t")
-        con2.commit()
+        cur.execute("DELETE from d_t")
+        con.commit()
         ### INSERT Date DATA ###
-        cur2.execute("INSERT INTO d_t (datee, timee) VALUES (?,?)", (date, time))
-        con2.commit()
+        cur.execute("INSERT INTO d_t (datee, timee) VALUES (%s,%s)", (date, time))
+        con.commit()
 
         ### Viewing Table Column Names ###
         '''names = list(map(lambda x: x[0], cur.description))
         print(names)'''
-        con2.commit()
+        con.commit()
         con.commit()
         print("Executed")
 
     ### VIEW Date DATA ###
-    dtdb = pd.read_sql_query("SELECT * FROM d_t", con2)
+    dtdb = pd.read_sql_query("SELECT * FROM d_t", con)
 
     ### VIEW Covid DATA ###
     db = pd.read_sql_query("SELECT * FROM covid", con)
