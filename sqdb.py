@@ -17,10 +17,11 @@ Database = 'd733kp4iefrk3c'
 User = 'kbjvpsitqsewlk'
 Port = '5432'
 Password = 'b60dfaa659edc207777782569ba293c529de7c54e62ea542b3767a9aac75feee'
+URI = 'postgres://kbjvpsitqsewlk:b60dfaa659edc207777782569ba293c529de7c54e62ea542b3767a9aac75feee@ec2-107-20-153-39.compute-1.amazonaws.com:5432/d733kp4iefrk3c'
 
 con = psycopg2.connect(f"dbname='{Database}' user='{User}' password='{Password}' host='{Host}' port='{Port}'")
 cur = con.cursor()
-engine = create_engine(f'postgresql://{User}:{Password}@{Host}:{Port}/{Database}')
+engine = create_engine(f'{URI}://{User}:{Password}@{Host}:{Port}/{Database}')
 
 ### CREATE Date TABLE ###
 cur.execute("CREATE TABLE if NOT EXISTS d_t (datee TEXT, timee TEXT)")
