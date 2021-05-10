@@ -21,7 +21,7 @@ URI = 'postgres://kbjvpsitqsewlk:b60dfaa659edc207777782569ba293c529de7c54e62ea54
 
 con = psycopg2.connect(f"dbname='{Database}' user='{User}' password='{Password}' host='{Host}' port='{Port}'")
 cur = con.cursor()
-engine = create_engine(f'{URI}://{User}:{Password}@{Host}:{Port}/{Database}')
+engine = create_engine(f'postgresql://{User}:{Password}@{Host}:{Port}/{Database}')
 url = "https://covid.ourworldindata.org/data/owid-covid-data.csv"
 # url = "owid-covid-data.csv"
 df = pd.read_csv(url)
