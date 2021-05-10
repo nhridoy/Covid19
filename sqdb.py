@@ -66,7 +66,7 @@ def in_date(date, time):
         # url = "owid-covid-data.csv"
         df = pd.read_csv(url)
         col = list(df)
-        df.to_sql("covid", engine, if_exists='replace ')
+        df.to_sql("covid", engine, if_exists='replace')
         con.commit()
 
         ### DELETING Date DATA ###
