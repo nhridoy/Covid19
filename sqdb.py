@@ -23,11 +23,7 @@ con = psycopg2.connect(f"dbname='{Database}' user='{User}' password='{Password}'
 cur = con.cursor()
 engine = create_engine(f'postgresql://{User}:{Password}@{Host}:{Port}/{Database}')
 url = "https://covid.ourworldindata.org/data/owid-covid-data.csv"
-# url = "owid-covid-data.csv"
-df = pd.read_csv(url)
-col = list(df)
-df.to_sql("covid", engine)
-con.commit()
+
 ### CREATE Date TABLE ###
 cur.execute("CREATE TABLE if NOT EXISTS d_t (datee TEXT, timee TEXT)")
 con.commit()
@@ -70,7 +66,7 @@ def in_date(date, time):
         # url = "owid-covid-data.csv"
         df = pd.read_csv(url)
         col = list(df)
-        df.to_sql("covid", engine)
+        df.to_sql("covid", engine, if_exists='replace ')
         con.commit()
 
         ### DELETING Date DATA ###
