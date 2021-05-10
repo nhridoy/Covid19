@@ -99,7 +99,6 @@ def covid_processing(country_name=country_name):
     country_total = pd.DataFrame(country_total)
     country_total.insert(0, 'id', range(0, 0 + len(country_total)))
     last_date = world_total.tail(1)
-    last_cases = int(last_date["total_cases"])
     last_death = int(last_date["total_deaths"])
 
     ### Getting All Datas ###
