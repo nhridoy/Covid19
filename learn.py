@@ -10,7 +10,7 @@ import urllib.request
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 import sqdb
-from sqdb import con
+from sqdb import con, con2
 
 
 def get_country(c="bangladesh"):
@@ -99,12 +99,14 @@ def covid_processing(country_name=country_name):
     country_total = pd.DataFrame(country_total)
     country_total.insert(0, 'id', range(0, 0 + len(country_total)))
     last_date = world_total.tail(1)
+    last_cases = int(last_date["total_cases"])
+    last_death = int(last_date["total_deaths"])
 
     ### Getting All Datas ###
     world_total_confirmed_cases = int(world_o.find_all("td")[2].text[:].replace(',', ''))
     world_total_confirmed_cases_new = int(world_o.find_all("td")[3].text[1:].replace(',', ''))
     world_total_death = covid_data.get_total_deaths()
-    world_total_death_new = int(world_o.find_all("td")[5].text[1:].replace(',', ''))
+    world_total_death_new = world_total_death - last_death
     world_total_recovered = covid_data.get_total_recovered()
     world_recovered_new = world_recovered_new
     world_total_active = covid_data.get_total_active_cases()
@@ -162,7 +164,8 @@ def covid_processing(country_name=country_name):
     ### Figure Making ###
     world_country = [world_total, country_total]
     world_country = pd.concat(world_country)
-    fig = px.line(world_country, x="date", y="total_cases", title=f'Total Cases Compare Between World and {country_name}', color='location')
+    fig = px.line(world_country, x="date", y="total_cases",
+                  title=f'Total Cases Compare Between World and {country_name}', color='location')
     fig = fig.to_html(fig, full_html=False)
 
     return da, ti, world_total_confirmed_cases, world_total_confirmed_cases_new, world_total_death, world_total_death_new, world_total_recovered, world_recovered_new, world_total_active, world_total_serious, country_cases, country_total_cases, country_total_death, country_total_recovered, country_recovered_new, country_total_active, country_cases_new, country_death_new, country_total_serious, world_total_predicted_cases, country_total_predicted_cases, fig
@@ -170,4 +173,4 @@ def covid_processing(country_name=country_name):
 
 '''da, ti, world_total_confirmed_cases, world_total_confirmed_cases_new, world_total_death, world_total_death_new, world_total_recovered, world_recovered_new, world_total_active, world_total_serious, country_cases, country_total_cases, country_total_death, country_total_recovered, country_recovered_new, country_total_active, country_cases_new, country_death_new, country_total_serious, world_total_predicted_cases, country_total_predicted_cases, fig = covid_processing()
 
-print(world_total_death_new)'''
+print(world_total_predicted_cases, country_total_predicted_cases)'''
