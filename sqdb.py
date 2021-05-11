@@ -91,3 +91,6 @@ def in_date(date, time):
     db = pd.read_sql_query("SELECT * FROM covid", con)
 
     return dtdb, db
+
+
+
