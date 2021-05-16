@@ -45,7 +45,7 @@ def get_country(c="BANGLADESH"):
 
 countries, country_name, date, time = get_country()
 
-print((countries))
+
 def covid_processing(country_name=country_name):
     '''def extra_data():
         url = "https://covid.ourworldindata.org/data/owid-covid-data.csv"
