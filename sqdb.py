@@ -35,8 +35,6 @@ print(f"Old Date: {old_date}")
 print(f"New Date: {new_date}")
 
 if old_date == new_date:
-    old_time = datetime.strptime(str(old_time), "%Y-%m-%d %H:%M:%S")
-    new_time = datetime.strptime(str(new_time), "%Y-%m-%d %H:%M:%S")
     comp_time = new_time-old_time
     static_time = datetime.strptime(f"{date} 04:00:00", "%Y-%m-%d %H:%M:%S")
     comp_time = datetime.strptime(f"{date} {comp_time}", "%Y-%m-%d %H:%M:%S")

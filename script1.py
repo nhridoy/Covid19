@@ -7,7 +7,7 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def home():
     # return render_template("index.html")
-    countries, country_name, date, time, covid_data = learn.get_country()
+    countries, country_name, date, time = learn.get_country()
     da, ti, world_total_confirmed_cases, world_total_confirmed_cases_new, world_total_death, world_total_death_new, world_total_recovered, world_recovered_new, world_total_active, world_total_serious, country_cases, country_total_cases, country_total_death, country_total_recovered, country_recovered_new, country_total_active, country_cases_new, country_death_new, country_total_serious, world_total_predicted_cases, country_total_predicted_cases, fig = learn.covid_processing()
     # x = pd.DataFrame(np.random.randn(20, 5))
 
@@ -17,7 +17,7 @@ def home():
         da, ti, world_total_confirmed_cases, world_total_confirmed_cases_new, world_total_death, world_total_death_new, world_total_recovered, world_recovered_new, world_total_active, world_total_serious, country_cases, country_total_cases, country_total_death, country_total_recovered, country_recovered_new, country_total_active, country_cases_new, country_death_new, country_total_serious, world_total_predicted_cases, country_total_predicted_cases, fig = learn.covid_processing(
             str(country_name))
 
-    countries.remove(country_name.lower())
+    countries.remove(country_name)
 
     iframe = Markup(fig)
 
