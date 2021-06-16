@@ -53,7 +53,7 @@ def in_date(date, time):
     if old_date != new_date or static_time <= comp_time:
         ### Loading Data From Web ###
         url = "https://covid.ourworldindata.org/data/owid-covid-data.csv"
-        # url = "owid-covid-data.csv"
+        # url = "owid-covid-data (1).csv"
         df = pd.read_csv(url)
         col = list(df)
 
@@ -61,7 +61,7 @@ def in_date(date, time):
         cur.execute(
             "CREATE TABLE if NOT EXISTS covid ({},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},"
             "{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},"
-            "{},{} )".format(*col))
+            "{},{},{} )".format(*col))
         con.commit()
 
         ### Intering Values from csv to Table ###
